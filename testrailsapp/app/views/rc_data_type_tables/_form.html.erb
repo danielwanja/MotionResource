@@ -1,0 +1,61 @@
+<%= form_for(@rc_data_type_table) do |f| %>
+  <% if @rc_data_type_table.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@rc_data_type_table.errors.count, "error") %> prohibited this rc_data_type_table from being saved:</h2>
+
+      <ul>
+      <% @rc_data_type_table.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :a_string %><br />
+    <%= f.text_field :a_string %>
+  </div>
+  <div class="field">
+    <%= f.label :a_text %><br />
+    <%= f.text_area :a_text %>
+  </div>
+  <div class="field">
+    <%= f.label :an_integer %><br />
+    <%= f.number_field :an_integer %>
+  </div>
+  <div class="field">
+    <%= f.label :a_float %><br />
+    <%= f.text_field :a_float %>
+  </div>
+  <div class="field">
+    <%= f.label :a_decimal %><br />
+    <%= f.text_field :a_decimal %>
+  </div>
+  <div class="field">
+    <%= f.label :a_datetime %><br />
+    <%= f.datetime_select :a_datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :a_timestamp %><br />
+    <%= f.datetime_select :a_timestamp %>
+  </div>
+  <div class="field">
+    <%= f.label :a_time %><br />
+    <%= f.time_select :a_time %>
+  </div>
+  <div class="field">
+    <%= f.label :a_date %><br />
+    <%= f.date_select :a_date %>
+  </div>
+  <div class="field">
+    <%= f.label :a_binary %><br />
+    <%= f.text_field :a_binary %>
+  </div>
+  <div class="field">
+    <%= f.label :a_boolean %><br />
+    <%= f.check_box :a_boolean %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

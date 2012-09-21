@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  city: MyString
+  state: CO
+
+two:
+  name: MyString
+  city: MyString
+  state: GE

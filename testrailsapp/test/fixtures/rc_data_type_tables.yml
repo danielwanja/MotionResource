@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  a_string: MyString
+  a_text: MyText
+  an_integer: 1
+  a_float: 1.5
+  a_decimal: 9.99
+  a_datetime: 2011-08-15 17:06:09
+  a_timestamp: 2011-08-15 17:06:09
+  a_time: 2011-08-15 17:06:09
+  a_date: 2011-08-15
+  a_binary: 
+  a_boolean: false
+
+two:
+  a_string: MyString
+  a_text: MyText
+  an_integer: 1
+  a_float: 1.5
+  a_decimal: 9.99
+  a_datetime: 2011-08-15 17:06:09
+  a_timestamp: 2011-08-15 17:06:09
+  a_time: 2011-08-15 17:06:09
+  a_date: 2011-08-15
+  a_binary: 
+  a_boolean: false

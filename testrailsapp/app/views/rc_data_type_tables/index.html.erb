@@ -1,0 +1,43 @@
+<h1>Listing rc_data_type_tables</h1>
+
+<table>
+  <tr>
+    <th>A string</th>
+    <th>A text</th>
+    <th>An integer</th>
+    <th>A float</th>
+    <th>A decimal</th>
+    <th>A datetime</th>
+    <th>A timestamp</th>
+    <th>A time</th>
+    <th>A date</th>
+    <th>A binary</th>
+    <th>A boolean</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rc_data_type_tables.each do |rc_data_type_table| %>
+  <tr>
+    <td><%= rc_data_type_table.a_string %></td>
+    <td><%= rc_data_type_table.a_text %></td>
+    <td><%= rc_data_type_table.an_integer %></td>
+    <td><%= rc_data_type_table.a_float %></td>
+    <td><%= rc_data_type_table.a_decimal %></td>
+    <td><%= rc_data_type_table.a_datetime %></td>
+    <td><%= rc_data_type_table.a_timestamp %></td>
+    <td><%= rc_data_type_table.a_time %></td>
+    <td><%= rc_data_type_table.a_date %></td>
+    <td><%= rc_data_type_table.a_binary %></td>
+    <td><%= rc_data_type_table.a_boolean %></td>
+    <td><%= link_to 'Show', rc_data_type_table %></td>
+    <td><%= link_to 'Edit', edit_rc_data_type_table_path(rc_data_type_table) %></td>
+    <td><%= link_to 'Destroy', rc_data_type_table, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rc data type table', new_rc_data_type_table_path %>
