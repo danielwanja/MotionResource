@@ -67,7 +67,21 @@ describe "MotionResource" do
       query.headers['X_HTTP_METHOD_OVERRIDE'].should == "delete"
     end
 
-
+    it "should save" do
+      # Create
+      department = Department.new()
+      query = department.save()
+      query.class.should == BubbleWrap::HTTP::Query
+      query.url.absoluteString.should == "http://localhost:3000/departments.json"
+      query.method.should == "POST"      
+      # Update
+      department = Department.new( id: 1)
+      query = department.save()
+      query.class.should == BubbleWrap::HTTP::Query
+      query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
+      query.method.should == "POST"      
+      query.headers['X_HTTP_METHOD_OVERRIDE'].should == "put"
+    end
   end
 
   # describe "CRUD" do

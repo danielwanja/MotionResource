@@ -139,8 +139,7 @@ module MotionResource
     end
 
     def save(options={})
-      # assertRestCall(ActiveResource.update(Department, {id:1}),   "/departments/1.json", "POST"); // PUT
-      # assertThat(lastHttpService.headers, hasProperties({X_HTTP_METHOD_OVERRIDE:'put'}));      
+      id.nil? ? self.class.create(self) : self.class.update(self)
     end
 
     def destroy(options={})
