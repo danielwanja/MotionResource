@@ -9,7 +9,7 @@ if Rails.env.test?
     
     def reset
       ActiveRecord::Fixtures.reset_cache
-      factory_names = Array(params[:fixtures][:fixture])
+      factory_names = Array(params[:fixtures].split(","))
       fixtures = {}
       factory_names.each do |factory| 
         fixtures.merge!(self.send(factory)) # Here we could use the factory as key.

@@ -12,9 +12,12 @@ module MotionResource
       def base_url
         Config.base_url
       end
-
-      def findAll(options={})
-         BubbleWrap::HTTP::Query.new( "#{base_url}#{resource_name}.json", :get, { } )
+    def self.get(url, options={}, &block)
+      create_query(url, :get, options, block)
+    end
+      def findAll(options={}, &block)
+        options[:action] = block if block
+        BubbleWrap::HTTP::Query.new( "#{base_url}#{resource_name}.json", :get, options )
       end
 
       def find(id, options={})

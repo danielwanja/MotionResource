@@ -1,1 +1,13 @@
 TODO:
+[ ] test Rails test app (rake test)
+[ ] server calls findAll
+[ ] JSON parsing
+[ ] JSON generation
+[ ] find
+[ ] create
+[ ] update
+[ ] delete
+[ ] collection verbs
+[ ] member verbs
+[ ] nested resources
+[ ] nested attributes

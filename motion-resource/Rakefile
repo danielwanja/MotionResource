@@ -5,7 +5,8 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project'
 Bundler.setup
 Bundler.require
-require 'bubble-wrap/http'
+# require 'bubble-wrap/http'
+require 'bubble-wrap/all'   # FIXME: we really only need http and json
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.

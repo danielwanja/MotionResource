@@ -29,59 +29,59 @@ describe "MotionResource" do
       Employee.resource_name.should == "employees"
     end
 
-    it "should have RESTful URLs" do      
-      # Index
-      query = Department.findAll()
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments.json"
-      query.method.should == "GET"
+    # it "should have RESTful URLs" do      
+    #   # Index
+    #   query = Department.findAll()
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments.json"
+    #   query.method.should == "GET"
 
-      # Show
-      query = Department.find(1)
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
-      query.method.should == "GET"      
+    #   # Show
+    #   query = Department.find(1)
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
+    #   query.method.should == "GET"      
       
-      # Create
-      query = Department.create(Department.new)
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments.json"
-      query.method.should == "POST"      
+    #   # Create
+    #   query = Department.create(Department.new)
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments.json"
+    #   query.method.should == "POST"      
       
-      # assertRestCall(MotionResource.find(Department, 1),      "/departments/1.json", "GET");
+    #   # assertRestCall(MotionResource.find(Department, 1),      "/departments/1.json", "GET");
       
-      # Update
-      department = Department.new( id: 1)
-      query = Department.update(department)
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
-      query.method.should == "POST"      
-      query.headers['X_HTTP_METHOD_OVERRIDE'].should == "put"
+    #   # Update
+    #   department = Department.new( id: 1)
+    #   query = Department.update(department)
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
+    #   query.method.should == "POST"      
+    #   query.headers['X_HTTP_METHOD_OVERRIDE'].should == "put"
       
-      # Delete
-      department = Department.new( id: 1)
-      query = Department.delete(department)
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
-      query.method.should == "POST"      
-      query.headers['X_HTTP_METHOD_OVERRIDE'].should == "delete"
-    end
+    #   # Delete
+    #   department = Department.new( id: 1)
+    #   query = Department.delete(department)
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
+    #   query.method.should == "POST"      
+    #   query.headers['X_HTTP_METHOD_OVERRIDE'].should == "delete"
+    # end
 
-    it "should save" do
-      # Create
-      department = Department.new()
-      query = department.save()
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments.json"
-      query.method.should == "POST"      
-      # Update
-      department = Department.new( id: 1)
-      query = department.save()
-      query.class.should == BubbleWrap::HTTP::Query
-      query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
-      query.method.should == "POST"      
-      query.headers['X_HTTP_METHOD_OVERRIDE'].should == "put"
-    end
+    # it "should save" do
+    #   # Create
+    #   department = Department.new()
+    #   query = department.save()
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments.json"
+    #   query.method.should == "POST"      
+    #   # Update
+    #   department = Department.new( id: 1)
+    #   query = department.save()
+    #   query.class.should == BubbleWrap::HTTP::Query
+    #   query.url.absoluteString.should == "http://localhost:3000/departments/1.json"
+    #   query.method.should == "POST"      
+    #   query.headers['X_HTTP_METHOD_OVERRIDE'].should == "put"
+    # end
   end
 
   # describe "CRUD" do
