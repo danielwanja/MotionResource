@@ -12,6 +12,8 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'motion_resource_test_suite'
   app.identifier = 'com.n-so.motion-resource.test-suite'
+  app.files += ['./lib/motion-resource/resource_utility_methods.rb']
+  app.files += ['./lib/motion-resource/resource_model_methods.rb']
   app.files += Dir.glob('./lib/motion-resource/**/*.rb')
   app.files = (app.files + Dir.glob('./app/**/*.rb')).uniq  
 end

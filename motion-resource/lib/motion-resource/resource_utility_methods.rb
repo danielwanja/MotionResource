@@ -1,6 +1,11 @@
 module MotionResource
   module Resource
     module UtilityClassMethods
+
+      def self.included(base)
+        base.extend(ClassMethods)      
+      end
+
       module ClassMethods
 
         def underscore(camel_cased_word)

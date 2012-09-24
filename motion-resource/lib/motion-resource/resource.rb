@@ -66,26 +66,15 @@ module MotionResource
 
     # Instance Methods 
 
-    def initialize(options = {})
-      @data ||= {}
-      
-      columns.each do |col|
-        options[col] ||= self.class.default(col)
-        cast_value = cast_to_type(col, options[col])
-        @data[col] = cast_value
-      end
-    end    
-
-    def show(options={})
+    def show(options={}, &block)
     end
 
-    def save(options={})
+    def save(options={}, &block)
       id.nil? ? self.class.create(self) : self.class.update(self)
     end
 
-    def destroy(options={})
-      # assertRestCall(ActiveResource.destroy(Department, {id:1}),  "/departments/1.json", "POST"); // DELETE
-      # assertThat(lastHttpService.headers, hasProperties({X_HTTP_METHOD_OVERRIDE:'delete'}));      
+    def destroy(options={}, &block)   # FIXME: align with class method delete .vs. destroy
+      self.class.delete(this, options, &block)
     end
 
     # FIXME: try to avoid this and let access by keys
@@ -93,7 +82,8 @@ module MotionResource
       columns.inject({}) {|h, c| h[c] = self.send(c); h }      
     end
 
-    # Introspection Methods (borrow from MotionModel)
-
+    # Instance Methods (borrowed from MotionModel)
+    include MotionResource::Resource::UtilityClassMethods
+    include MotionResource::Resource::ModelMethods
   end
 end

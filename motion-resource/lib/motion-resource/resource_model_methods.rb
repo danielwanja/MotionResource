@@ -3,6 +3,10 @@ module MotionResource
   module Resource
     module ModelMethods
 
+      def self.included(base)
+        base.extend(ClassMethods)      
+      end      
+
       module ClassMethods
         # Macro to define names and types of columns. It can be used in one of
         # two forms:
@@ -18,7 +22,6 @@ module MotionResource
         # Pass an array, and you create column names, all of which have type +:string+.
         #   
         #   columns :name, :age, :hobby
-        
         def columns(*fields)
           return @_columns.map{|c| c.name} if fields.empty?
 
@@ -44,13 +47,14 @@ module MotionResource
             end
           end
 
-          unless self.respond_to?(:id)
-            add_field(:id, :integer)
-          end
+          # Id must be specified, this allows multiple calls to columns
+          # unless self.respond_to?(:id)
+          #   add_field(:id, :integer)
+          # end
         end
 
         def add_field(name, options, default = nil) #nodoc
-          col = Column.new(name, options, default)
+          col = Column.new(name.to_sym, options, default)
           @_columns.push col
           @_column_hashes[col.name.to_sym] = col
         end
@@ -74,25 +78,34 @@ module MotionResource
       end # ClassMethods
 
       # Instance Methods
+      def initialize(options = {})
+        @data ||= {}
+        columns.each do |col|
+          options[col] = self.class.default(col) if options[col].nil?
+          cast_value = cast_to_type(col, options[col])
+          @data[col] = cast_value
+        end
+        self
+      end    
+
       def cast_to_type(column_name, arg)
         return nil if arg.nil?
-        
         return_value = arg
         
         case type(column_name)
         when :string
-          return_value = arg.to_s
+          return return_value = arg.to_s
         when :int, :integer
-          return_value = arg.is_a?(Integer) ? arg : arg.to_i
+          return return_value = arg.is_a?(Integer) ? arg : arg.to_i
         when :float, :double
-          return_value = arg.is_a?(Float) ? arg : arg.to_f
+          return return_value = arg.is_a?(Float) ? arg : arg.to_f
         when :date
           return arg if arg.is_a?(NSDate)
-          return_value = NSDate.dateWithNaturalLanguageString(arg, locale:NSUserDefaults.standardUserDefaults.dictionaryRepresentation)
-        else
-          raise ArgumentError.new("type #{column_name} : #{type(column_name)} is not possible to cast.")
+          return return_value = NSDate.dateWithNaturalLanguageString(arg, locale:NSUserDefaults.standardUserDefaults.dictionaryRepresentation)
+        when :boolean
+          return arg.is_a?(TrueClass) ? true : false # FIXME: test the hell out of that
         end
-        return_value
+        raise ArgumentError.new("type #{column_name} : #{type(column_name)} is not possible to cast.")
       end
 
       def to_s

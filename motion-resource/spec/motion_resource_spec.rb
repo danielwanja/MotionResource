@@ -13,6 +13,7 @@ describe "MotionResource" do
     columns :job_id => :integer, :department_id => :integer, :manager_id => :integer
     columns :hire_date => :date
     columns :salary => :integer
+    columns :fired => :boolean
   end
 
   class BubbleWrap::HTTP::Query
@@ -21,6 +22,16 @@ describe "MotionResource" do
 
   before do
     #@localhost_url = 'http://localhost:3000'
+  end
+
+  describe ".included" do    
+      it "should have class methods" do
+        Employee.respond_to?(:columns).should == true
+      end
+
+      it "should have instance methods" do
+        Employee.new.respond_to?(:columns).should == true
+      end
   end
 
   describe "Resource" do
@@ -47,8 +58,6 @@ describe "MotionResource" do
     #   query.class.should == BubbleWrap::HTTP::Query
     #   query.url.absoluteString.should == "http://localhost:3000/departments.json"
     #   query.method.should == "POST"      
-      
-    #   # assertRestCall(MotionResource.find(Department, 1),      "/departments/1.json", "GET");
       
     #   # Update
     #   department = Department.new( id: 1)
