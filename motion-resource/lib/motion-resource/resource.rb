@@ -51,8 +51,7 @@ module MotionResource
         BubbleWrap::HTTP.send(method, url, options ) do |response|
           if response.ok?
             json = BubbleWrap::JSON.parse(response.body.to_str)
-            # FIXME: translate json --> resources
-            response.instance_variable_set("@body", json) # replace response with translated JSON.
+            response.instance_variable_set("@body", from_rails(json))
           else
             # FIXME: define how to handle errors (i.e rails validations should be translated to JSON)  
           end
@@ -60,6 +59,18 @@ module MotionResource
             delegator.call( response, self )            
           end
         end        
+      end
+
+      def from_rails(json)
+        if json.is_a?(Array)
+          result = []
+          json.each do |record|
+            result << self.new(record)
+          end
+          result
+        else
+          self.new(json)
+        end
       end
 
     end # ClassMethods

@@ -11,6 +11,8 @@ describe "Server Calls" do
     columns :a_string, :a_text
     columns :a_float => :float, :a_decimal => :float
     columns :a_datetime => :date
+    columns :a_time => :date
+    columns :a_date => :date
     columns :a_boolean => :boolean
   end
 
@@ -67,8 +69,19 @@ describe "Server Calls" do
       result = @wait.body
       result.class.should == Array
       result.length.should == 1
-      valid_rc_data_type_table(result[0])
-      result[0].class.should == RcDataTypeTable
+      record = result[0]
+      record.class.should == RcDataTypeTable
+      record.a_decimal.should.be.close 9.99, 0.001
+      record.a_datetime.should.is_a(Time)
+      record.a_datetime.to_s.should == "2011-08-15 11:06:09 -0600"
+      record.a_time.should.is_a(Time)
+      record.a_time.to_s.should == "2000-01-01 10:06:09 -0700"
+      record.a_string.should == "MyString"
+      record.an_integer.should == 1
+      record.a_float.should == 1.5
+      record.a_date.to_s.should == "2011-08-15 06:00:00 -0600" # "2011-08-15"
+      record.a_boolean.should == false
+      record.a_text.should == "MyText"        
     end    
   end
 
