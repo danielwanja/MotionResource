@@ -57,8 +57,7 @@ describe "Server Calls" do
     @wait = WaitResponse.new
     RcDataTypeTable.findAll() do |response|
       if response.ok?
-        json = BubbleWrap::JSON.parse(response.body.to_str)
-        @wait.body = json
+        @wait.body = response.body
         @wait.response = response
       else
         raise "Failed to setup fixtures. #{response.body}"
